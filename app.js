@@ -617,9 +617,6 @@
       switchTab(btn.dataset.tab);
     });
 
-    document.getElementById('selection-badge').addEventListener('click', function () {
-      switchTab('plan');
-    });
   }
 
   function switchTab(tab) {
@@ -644,7 +641,7 @@
     renderMeals();
     renderPlan();
     renderShopping();
-    updateSelectionBadge();
+
   }
 
   // ============================================================
@@ -666,7 +663,7 @@
       return buildMealCardHTML(meal);
     }).join('');
     bindMealCardEvents(grid);
-    updateSelectionBadge();
+
   }
 
   function toggleFavorite(mealId) {
@@ -785,7 +782,7 @@
   function renderMeals() {
     renderChips();
     renderMealGrid();
-    updateSelectionBadge();
+
   }
 
   function renderChips() {
@@ -838,19 +835,9 @@
     persistSelection();
     renderFavorites();
     renderMealGrid();
-    updateSelectionBadge();
+
   }
 
-  function updateSelectionBadge() {
-    var badge = document.getElementById('selection-badge');
-    var count = state.selection.length;
-    if (count > 0) {
-      badge.style.display = '';
-      document.getElementById('selection-count').textContent = count + ' Gericht' + (count !== 1 ? 'e' : '');
-    } else {
-      badge.style.display = 'none';
-    }
-  }
 
   // ============================================================
   // Meal Modal (Add / Edit)
@@ -1040,8 +1027,9 @@
   function bindConfirmModal() {
     document.getElementById('btn-confirm-cancel').addEventListener('click', closeConfirmModal);
     document.getElementById('btn-confirm-ok').addEventListener('click', function () {
+      var cb = confirmCallback;
       closeConfirmModal();
-      if (confirmCallback) confirmCallback();
+      if (cb) cb();
     });
     document.getElementById('modal-confirm').addEventListener('click', function (e) {
       if (e.target === this) closeConfirmModal();
@@ -1178,7 +1166,7 @@
     persistSelection();
     renderPlan();
     renderMealGrid();
-    updateSelectionBadge();
+
   }
 
   // ============================================================
