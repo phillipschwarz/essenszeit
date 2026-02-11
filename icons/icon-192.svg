@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 192 192">
+  <rect width="192" height="192" rx="38" fill="#E07A5F"/>
+  <g transform="translate(96,96)">
+    <!-- Pot body -->
+    <ellipse cx="0" cy="10" rx="46" ry="36" fill="#FEFAF6"/>
+    <!-- Pot rim -->
+    <rect x="-52" y="-10" width="104" height="10" rx="5" fill="#FEFAF6"/>
+    <!-- Pot handles -->
+    <rect x="-62" y="-8" width="14" height="6" rx="3" fill="#FEFAF6"/>
+    <rect x="48" y="-8" width="14" height="6" rx="3" fill="#FEFAF6"/>
+    <!-- Lid knob -->
+    <circle cx="0" cy="-18" r="6" fill="#FEFAF6"/>
+    <!-- Steam lines -->
+    <path d="M-12,-30 Q-12,-42 -6,-48" stroke="#FEFAF6" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M0,-32 Q0,-46 6,-52" stroke="#FEFAF6" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M12,-30 Q12,-42 18,-48" stroke="#FEFAF6" stroke-width="3" fill="none" stroke-linecap="round"/>
+  </g>
+</svg>

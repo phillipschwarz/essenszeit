@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="theme-color" content="#E07A5F">
+  <title>Essenszeit</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/svg+xml" href="icons/icon-192.svg">
+  <link rel="apple-touch-icon" href="icons/icon-192.svg">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== Auth Screen (fullscreen, shown when no session) ===== -->
+  <div id="auth-screen" style="display:none;">
+    <div class="auth-container">
+      <div class="auth-logo">Essenszeit</div>
+      <p class="auth-subtitle" id="auth-subtitle">Melde dich an, um auf deine Gerichte zuzugreifen.</p>
+
+      <div class="form-group">
+        <label for="auth-email">E-Mail</label>
+        <input type="email" id="auth-email" placeholder="deine@email.de" autocomplete="email">
+      </div>
+
+      <div class="form-group">
+        <label for="auth-password">Passwort</label>
+        <input type="password" id="auth-password" placeholder="Mindestens 6 Zeichen" autocomplete="current-password">
+      </div>
+
+      <div class="form-group" id="auth-confirm-group" style="display:none;">
+        <label for="auth-password-confirm">Passwort wiederholen</label>
+        <input type="password" id="auth-password-confirm" placeholder="Passwort best&auml;tigen" autocomplete="new-password">
+      </div>
+
+      <div id="auth-message" class="auth-message" style="display:none;"></div>
+
+      <button type="button" id="btn-auth-submit" class="primary-btn">Anmelden</button>
+
+      <div class="auth-toggle">
+        <span id="auth-toggle-text">Noch kein Konto?</span>
+        <button type="button" id="btn-auth-toggle" class="auth-toggle-btn">Registrieren</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== App Container (hidden until authenticated) ===== -->
+  <div id="app-container">
+
+  <!-- ===== Tab: Meals Gallery ===== -->
+  <main id="tab-meals" class="tab-content active">
+    <header class="screen-header">
+      <h1>Was kochst du<br>diese Woche?</h1>
+      <div class="header-actions">
+        <button id="btn-account" class="header-action" aria-label="Account">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>
+        </button>
+        <button id="btn-add-meal" class="header-action" aria-label="Add new meal">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Search bar -->
+    <div class="search-bar">
+      <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="search-input" placeholder="Gericht suchen..." aria-label="Search meals">
+    </div>
+
+    <!-- Tag chips -->
+    <div class="chip-bar" id="chip-bar"></div>
+
+    <!-- Meal grid -->
+    <div class="meal-grid" id="meal-grid"></div>
+
+    <!-- Selection badge -->
+    <div class="selection-badge" id="selection-badge" style="display:none;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="14" rx="9" ry="7"/><rect x="3" y="8" width="18" height="3" rx="1.5"/><circle cx="12" cy="5" r="2.5"/></svg>
+      <span id="selection-count">0 Gerichte</span>
+    </div>
+  </main>
+
+  <!-- ===== Tab: Meal Plan (Essensplan) ===== -->
+  <main id="tab-plan" class="tab-content">
+    <header class="screen-header">
+      <h1>Essensplan</h1>
+    </header>
+
+    <div id="plan-empty" class="empty-state">
+      <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+        <circle cx="40" cy="40" r="38" stroke="#E07A5F" stroke-width="2" stroke-dasharray="6 4" opacity="0.4"/>
+        <ellipse cx="40" cy="42" rx="22" ry="16" stroke="#E07A5F" stroke-width="2" opacity="0.5"/>
+        <rect x="18" y="30" width="44" height="6" rx="3" stroke="#E07A5F" stroke-width="2" opacity="0.5"/>
+        <circle cx="40" cy="24" r="4" stroke="#E07A5F" stroke-width="2" opacity="0.5"/>
+      </svg>
+      <p>Noch keine Gerichte ausgew&auml;hlt</p>
+      <span>W&auml;hle Gerichte aus deiner Sammlung</span>
+    </div>
+
+    <div id="plan-list" class="plan-list"></div>
+
+    <button id="btn-generate-list" class="primary-btn" style="display:none;">Was brauche ich?</button>
+  </main>
+
+  <!-- ===== Tab: Shopping List ===== -->
+  <main id="tab-shopping" class="tab-content">
+    <header class="screen-header">
+      <h1>Einkaufsliste</h1>
+      <button id="btn-share" class="header-action" aria-label="Share shopping list">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+      </button>
+    </header>
+
+    <div class="progress-bar-container" id="progress-container" style="display:none;">
+      <div class="progress-bar" id="progress-bar"></div>
+      <span class="progress-label" id="progress-label">0/0</span>
+    </div>
+
+    <div id="shopping-empty" class="empty-state">
+      <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+        <rect x="20" y="12" width="40" height="56" rx="4" stroke="#E07A5F" stroke-width="2" opacity="0.4"/>
+        <line x1="28" y1="28" x2="52" y2="28" stroke="#E07A5F" stroke-width="2" opacity="0.3"/>
+        <line x1="28" y1="38" x2="48" y2="38" stroke="#E07A5F" stroke-width="2" opacity="0.3"/>
+        <line x1="28" y1="48" x2="44" y2="48" stroke="#E07A5F" stroke-width="2" opacity="0.3"/>
+      </svg>
+      <p>Keine Einkaufsliste</p>
+      <span>&Ouml;ffne den Essensplan und tippe &quot;Was brauche ich?&quot;</span>
+    </div>
+
+    <div id="shopping-list" class="shopping-list"></div>
+
+    <button id="btn-clear-list" class="secondary-btn" style="display:none;">Liste l&ouml;schen</button>
+  </main>
+
+  <!-- ===== Bottom Navigation ===== -->
+  <nav class="bottom-nav" id="bottom-nav">
+    <button class="nav-item active" data-tab="meals" aria-label="Meals gallery">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="7" height="7" rx="1.5"/>
+        <rect x="14" y="3" width="7" height="7" rx="1.5"/>
+        <rect x="3" y="14" width="7" height="7" rx="1.5"/>
+        <rect x="14" y="14" width="7" height="7" rx="1.5"/>
+      </svg>
+      <span>Gerichte</span>
+    </button>
+    <button class="nav-item" data-tab="plan" aria-label="Meal plan">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <ellipse cx="12" cy="14" rx="9" ry="7"/>
+        <rect x="3" y="8" width="18" height="3" rx="1.5"/>
+        <circle cx="12" cy="5" r="2.5"/>
+      </svg>
+      <span>Essensplan</span>
+    </button>
+    <button class="nav-item" data-tab="shopping" aria-label="Shopping list">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+        <rect x="9" y="3" width="6" height="4" rx="1"/>
+        <line x1="9" y1="12" x2="15" y2="12"/>
+        <line x1="9" y1="16" x2="13" y2="16"/>
+      </svg>
+      <span>Einkaufsliste</span>
+    </button>
+  </nav>
+
+  </div><!-- /app-container -->
+
+  <!-- ===== Modal: Add/Edit Meal ===== -->
+  <div class="modal-overlay" id="modal-meal" aria-hidden="true">
+    <div class="modal-sheet">
+      <div class="modal-handle"></div>
+      <h2 id="modal-meal-title">Neues Gericht</h2>
+
+      <div class="form-group">
+        <label class="image-upload" id="image-upload-area">
+          <input type="file" id="meal-image-input" accept="image/*" capture="environment" hidden>
+          <div class="image-preview" id="image-preview">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#E07A5F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2"/>
+              <circle cx="8.5" cy="8.5" r="1.5"/>
+              <polyline points="21 15 16 10 5 21"/>
+            </svg>
+            <span>Foto hinzuf&uuml;gen</span>
+          </div>
+        </label>
+      </div>
+
+      <div class="form-group">
+        <label for="meal-name">Name</label>
+        <input type="text" id="meal-name" placeholder="z.B. Spaghetti Bolognese" autocomplete="off">
+      </div>
+
+      <div class="form-group">
+        <label for="meal-tags">Tags (kommagetrennt)</label>
+        <input type="text" id="meal-tags" placeholder="z.B. Pasta, Klassiker" autocomplete="off">
+      </div>
+
+      <div class="form-group">
+        <label for="meal-servings">Standardportionen</label>
+        <input type="number" id="meal-servings" value="2" min="1" max="20">
+      </div>
+
+      <div class="form-group">
+        <label>Zutaten</label>
+        <div id="ingredients-list" class="ingredients-editor"></div>
+        <button type="button" id="btn-add-ingredient" class="add-ingredient-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Zutat hinzuf&uuml;gen
+        </button>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" id="btn-cancel-meal" class="secondary-btn">Abbrechen</button>
+        <button type="button" id="btn-save-meal" class="primary-btn">Speichern</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Modal: Confirm Dialog ===== -->
+  <div class="modal-overlay" id="modal-confirm" aria-hidden="true">
+    <div class="modal-dialog">
+      <h3 id="confirm-title">Best&auml;tigen</h3>
+      <p id="confirm-message">Bist du sicher?</p>
+      <div class="modal-actions">
+        <button type="button" id="btn-confirm-cancel" class="secondary-btn">Abbrechen</button>
+        <button type="button" id="btn-confirm-ok" class="primary-btn danger">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Modal: Profile (logged-in user) ===== -->
+  <div class="modal-overlay" id="modal-profile" aria-hidden="true">
+    <div class="modal-sheet">
+      <div class="modal-handle"></div>
+      <h2>Profil</h2>
+
+      <div class="auth-info">
+        <div class="auth-info-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>
+        </div>
+        <div class="auth-info-email" id="profile-email">nutzer@email.de</div>
+        <div class="auth-info-label">Angemeldet</div>
+      </div>
+
+      <button type="button" id="btn-logout" class="secondary-btn">Abmelden</button>
+      <button type="button" id="btn-profile-close" class="secondary-btn">Schlie&szlig;en</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script>
+    var SUPABASE_URL = 'https://nsdjbxvsaeslpxvdpxde.supabase.co';
+    var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5zZGpieHZzYWVzbHB4dmRweGRlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA3MjY2MTIsImV4cCI6MjA4NjMwMjYxMn0.QU0n6BX1olDfx_xfkZ--wmlsU5MwSWCo7hyM2urUfD0';
+    var supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  </script>
+  <script src="app.js"></script>
+</body>
+</html>
