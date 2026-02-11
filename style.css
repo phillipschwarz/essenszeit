@@ -404,17 +404,6 @@ h3 {
   box-shadow: var(--shadow);
   transition: transform 0.2s var(--ease), opacity 0.3s;
   position: relative;
-  overflow: hidden;
-  touch-action: pan-y;
-}
-
-.plan-item.swiping {
-  transition: none;
-}
-
-.plan-item.removing {
-  transform: translateX(-100%);
-  opacity: 0;
 }
 
 .plan-item-image {
@@ -487,25 +476,6 @@ h3 {
   font-size: 16px;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
-}
-
-/* Swipe delete background */
-.plan-item .delete-bg {
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 80px;
-  background: #ff3b30;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-size: 13px;
-  font-weight: 600;
-  opacity: 0;
-  transition: opacity 0.2s;
-  pointer-events: none;
 }
 
 /* ----- Empty State ----- */

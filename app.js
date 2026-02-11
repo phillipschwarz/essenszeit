@@ -1082,7 +1082,6 @@
       if (!meal) return '';
 
       return '<div class="plan-item" data-id="' + meal.id + '">' +
-        '<div class="delete-bg">L\u00f6schen</div>' +
         '<div class="plan-item-image">' +
           (meal.image
             ? '<img src="' + meal.image + '" alt="' + escapeHtml(meal.name) + '">'
@@ -1124,45 +1123,6 @@
         });
       });
 
-      bindSwipeToDelete(item, mealId);
-    });
-  }
-
-  function bindSwipeToDelete(item, mealId) {
-    var startX = 0;
-    var currentX = 0;
-    var swiping = false;
-    var deleteBg = item.querySelector('.delete-bg');
-
-    item.addEventListener('touchstart', function (e) {
-      startX = e.touches[0].clientX;
-      swiping = true;
-      item.classList.add('swiping');
-    }, { passive: true });
-
-    item.addEventListener('touchmove', function (e) {
-      if (!swiping) return;
-      currentX = e.touches[0].clientX;
-      var dx = Math.min(0, currentX - startX);
-      if (dx < -10) {
-        item.style.transform = 'translateX(' + dx + 'px)';
-        deleteBg.style.opacity = Math.min(1, Math.abs(dx) / 80);
-      }
-    }, { passive: true });
-
-    item.addEventListener('touchend', function () {
-      swiping = false;
-      item.classList.remove('swiping');
-      var dx = currentX - startX;
-      if (dx < -80) {
-        item.classList.add('removing');
-        setTimeout(function () {
-          removeMealFromPlan(mealId);
-        }, 300);
-      } else {
-        item.style.transform = '';
-        deleteBg.style.opacity = '0';
-      }
     });
   }
 
