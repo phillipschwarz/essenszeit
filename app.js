@@ -246,7 +246,7 @@
     return data.map(function (m) {
       return {
         id: m.id, name: m.name, image: m.image, tags: m.tags || [],
-        defaultServings: m.default_servings, isFavorite: !!m.is_favorite,
+        defaultServings: Number(m.default_servings) || 2, isFavorite: !!m.is_favorite,
         ingredients: (m.ingredients || [])
           .sort(function (a, b) { return a.sort_order - b.sort_order; })
           .map(function (ing) {
@@ -260,7 +260,7 @@
     var { data, error } = await sb
       .from('meal_selections').select('*').eq('user_id', userId);
     if (error) { console.error('Selection laden fehlgeschlagen:', error); return null; }
-    return data.map(function (s) { return { mealId: s.meal_id, servings: s.servings }; });
+    return data.map(function (s) { return { mealId: s.meal_id, servings: Number(s.servings) || 2 }; });
   }
 
   async function loadChecklistFromSupabase(userId) {
@@ -829,7 +829,7 @@
     } else {
       var meal = state.meals.find(function (m) { return m.id === mealId; });
       if (meal) {
-        state.selection.push({ mealId: mealId, servings: meal.defaultServings });
+        state.selection.push({ mealId: mealId, servings: Number(meal.defaultServings) || 2 });
       }
     }
     persistSelection();
@@ -1108,10 +1108,11 @@
           e.stopPropagation();
           var sel = state.selection.find(function (s) { return s.mealId === mealId; });
           if (!sel) return;
+          var cur = Number(sel.servings) || 1;
           if (btn.dataset.action === 'inc') {
-            sel.servings = Math.min(sel.servings + 1, 20);
+            sel.servings = Math.min(cur + 1, 20);
           } else {
-            sel.servings = Math.max(sel.servings - 1, 1);
+            sel.servings = Math.max(cur - 1, 1);
           }
           persistSelection();
           renderPlan();
