@@ -33,7 +33,7 @@
   function createSeedMeals() {
     return [
       {
-        id: uid(), name: 'Spaghetti Bolognese', image: null, tags: ['Klassiker', 'Pasta'], defaultServings: 2,
+        id: uid(), name: 'Spaghetti Bolognese', image: null, tags: ['Klassiker', 'Pasta'], defaultServings: 2, isFavorite: true,
         ingredients: [
           { id: uid(), name: 'Spaghetti', amount: 250, unit: 'g', category: 'Pantry' },
           { id: uid(), name: 'Hackfleisch', amount: 250, unit: 'g', category: 'Fleisch & Fisch' },
@@ -48,7 +48,7 @@
         ]
       },
       {
-        id: uid(), name: 'Caesar Salad', image: null, tags: ['Salat', 'Schnell'], defaultServings: 2,
+        id: uid(), name: 'Caesar Salad', image: null, tags: ['Salat', 'Schnell'], defaultServings: 2, isFavorite: false,
         ingredients: [
           { id: uid(), name: 'Romana-Salat', amount: 1, unit: 'Stk', category: 'Obst & Gem\u00fcse' },
           { id: uid(), name: 'H\u00e4hnchenbrust', amount: 200, unit: 'g', category: 'Fleisch & Fisch' },
@@ -61,7 +61,7 @@
         ]
       },
       {
-        id: uid(), name: 'Chicken Curry', image: null, tags: ['Asiatisch', 'W\u00fcrzig'], defaultServings: 3,
+        id: uid(), name: 'Chicken Curry', image: null, tags: ['Asiatisch', 'W\u00fcrzig'], defaultServings: 3, isFavorite: true,
         ingredients: [
           { id: uid(), name: 'H\u00e4hnchenbrust', amount: 400, unit: 'g', category: 'Fleisch & Fisch' },
           { id: uid(), name: 'Kokosmilch', amount: 400, unit: 'ml', category: 'Pantry' },
@@ -75,7 +75,7 @@
         ]
       },
       {
-        id: uid(), name: 'Gem\u00fcsepfanne', image: null, tags: ['Veggie', 'Schnell'], defaultServings: 2,
+        id: uid(), name: 'Gem\u00fcsepfanne', image: null, tags: ['Veggie', 'Schnell'], defaultServings: 2, isFavorite: false,
         ingredients: [
           { id: uid(), name: 'Zucchini', amount: 1, unit: 'Stk', category: 'Obst & Gem\u00fcse' },
           { id: uid(), name: 'Paprika', amount: 2, unit: 'Stk', category: 'Obst & Gem\u00fcse' },
@@ -88,7 +88,7 @@
         ]
       },
       {
-        id: uid(), name: 'Pancakes', image: null, tags: ['Fr\u00fchst\u00fcck', 'S\u00fc\u00df'], defaultServings: 2,
+        id: uid(), name: 'Pancakes', image: null, tags: ['Fr\u00fchst\u00fcck', 'S\u00fc\u00df'], defaultServings: 2, isFavorite: true,
         ingredients: [
           { id: uid(), name: 'Mehl', amount: 200, unit: 'g', category: 'Pantry' },
           { id: uid(), name: 'Milch', amount: 250, unit: 'ml', category: 'Milchprodukte' },
@@ -100,7 +100,7 @@
         ]
       },
       {
-        id: uid(), name: 'Kartoffelsuppe', image: null, tags: ['Suppe', 'Deutsch'], defaultServings: 4,
+        id: uid(), name: 'Kartoffelsuppe', image: null, tags: ['Suppe', 'Deutsch'], defaultServings: 4, isFavorite: false,
         ingredients: [
           { id: uid(), name: 'Kartoffeln', amount: 600, unit: 'g', category: 'Obst & Gem\u00fcse' },
           { id: uid(), name: 'Lauch', amount: 1, unit: 'Stk', category: 'Obst & Gem\u00fcse' },
@@ -113,7 +113,7 @@
         ]
       },
       {
-        id: uid(), name: 'Thai Basil Stir-Fry', image: null, tags: ['Asiatisch', 'Scharf'], defaultServings: 2,
+        id: uid(), name: 'Thai Basil Stir-Fry', image: null, tags: ['Asiatisch', 'Scharf'], defaultServings: 2, isFavorite: false,
         ingredients: [
           { id: uid(), name: 'H\u00e4hnchenbrust', amount: 300, unit: 'g', category: 'Fleisch & Fisch' },
           { id: uid(), name: 'Thai-Basilikum', amount: 1, unit: 'Bund', category: 'Obst & Gem\u00fcse' },
@@ -127,7 +127,7 @@
         ]
       },
       {
-        id: uid(), name: 'Griechischer Salat', image: null, tags: ['Salat', 'Veggie'], defaultServings: 2,
+        id: uid(), name: 'Griechischer Salat', image: null, tags: ['Salat', 'Veggie'], defaultServings: 2, isFavorite: false,
         ingredients: [
           { id: uid(), name: 'Tomate', amount: 3, unit: 'Stk', category: 'Obst & Gem\u00fcse' },
           { id: uid(), name: 'Gurke', amount: 1, unit: 'Stk', category: 'Obst & Gem\u00fcse' },
@@ -140,7 +140,7 @@
         ]
       },
       {
-        id: uid(), name: 'Lachs mit Reis', image: null, tags: ['Fisch', 'Gesund'], defaultServings: 2,
+        id: uid(), name: 'Lachs mit Reis', image: null, tags: ['Fisch', 'Gesund'], defaultServings: 2, isFavorite: false,
         ingredients: [
           { id: uid(), name: 'Lachsfilet', amount: 300, unit: 'g', category: 'Fleisch & Fisch' },
           { id: uid(), name: 'Reis', amount: 200, unit: 'g', category: 'Pantry' },
@@ -153,7 +153,7 @@
         ]
       },
       {
-        id: uid(), name: 'Flammkuchen', image: null, tags: ['Deutsch', 'Klassiker'], defaultServings: 2,
+        id: uid(), name: 'Flammkuchen', image: null, tags: ['Deutsch', 'Klassiker'], defaultServings: 2, isFavorite: true,
         ingredients: [
           { id: uid(), name: 'Mehl', amount: 250, unit: 'g', category: 'Pantry' },
           { id: uid(), name: 'Cr\u00e8me fra\u00eeche', amount: 200, unit: 'g', category: 'Milchprodukte' },
@@ -205,7 +205,7 @@
     meals: [],
     selection: [],   // { mealId, servings }
     checklist: [],   // checked item keys
-    activeTab: 'meals',
+    activeTab: 'favorites',
     searchQuery: '',
     activeTag: null,
     editingMealId: null,
@@ -246,7 +246,7 @@
     return data.map(function (m) {
       return {
         id: m.id, name: m.name, image: m.image, tags: m.tags || [],
-        defaultServings: m.default_servings,
+        defaultServings: m.default_servings, isFavorite: !!m.is_favorite,
         ingredients: (m.ingredients || [])
           .sort(function (a, b) { return a.sort_order - b.sort_order; })
           .map(function (ing) {
@@ -272,7 +272,7 @@
 
   async function saveMealToSupabase(meal, userId) {
     var row = { user_id: userId, name: meal.name, image: meal.image,
-      tags: meal.tags, default_servings: meal.defaultServings };
+      tags: meal.tags, default_servings: meal.defaultServings, is_favorite: !!meal.isFavorite };
     // Only send id if it's a valid UUID (skip client-generated ids for seed data)
     if (meal.id && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(meal.id)) {
       row.id = meal.id;
@@ -630,7 +630,8 @@
     document.querySelectorAll('.tab-content').forEach(function (el) {
       el.classList.toggle('active', el.id === 'tab-' + tab);
     });
-    if (tab === 'meals') renderMeals();
+    if (tab === 'favorites') renderFavorites();
+    else if (tab === 'all') renderMeals();
     else if (tab === 'plan') renderPlan();
     else if (tab === 'shopping') renderShopping();
   }
@@ -639,6 +640,7 @@
   // Render dispatcher
   // ============================================================
   function render() {
+    renderFavorites();
     renderMeals();
     renderPlan();
     renderShopping();
@@ -646,7 +648,131 @@
   }
 
   // ============================================================
-  // Meals Gallery
+  // Favorites Tab
+  // ============================================================
+  function renderFavorites() {
+    var grid = document.getElementById('favorites-grid');
+    var emptyEl = document.getElementById('favorites-empty');
+    var favorites = state.meals.filter(function (m) { return m.isFavorite; });
+
+    if (favorites.length === 0) {
+      grid.innerHTML = '';
+      emptyEl.style.display = '';
+      return;
+    }
+
+    emptyEl.style.display = 'none';
+    grid.innerHTML = favorites.map(function (meal) {
+      return buildMealCardHTML(meal);
+    }).join('');
+    bindMealCardEvents(grid);
+    updateSelectionBadge();
+  }
+
+  function toggleFavorite(mealId) {
+    var meal = state.meals.find(function (m) { return m.id === mealId; });
+    if (!meal) return;
+    meal.isFavorite = !meal.isFavorite;
+    saveJSON(STORAGE_MEALS, state.meals);
+    if (state.userId) {
+      saveMealToSupabase(meal, state.userId).catch(function (e) { console.error('Favorit-Sync fehlgeschlagen:', e); });
+    }
+    renderFavorites();
+    renderMealGrid();
+  }
+
+  // ============================================================
+  // Shared Meal Card Builder
+  // ============================================================
+  function buildMealCardHTML(meal) {
+    var sel = state.selection.find(function (s) { return s.mealId === meal.id; });
+    var isSelected = !!sel;
+    var servings = sel ? sel.servings : meal.defaultServings;
+
+    return '<div class="meal-card' + (isSelected ? ' selected' : '') + '" data-id="' + meal.id + '">' +
+      '<div class="meal-card-image">' +
+        (meal.image
+          ? '<img src="' + meal.image + '" alt="' + escapeHtml(meal.name) + '" loading="lazy">'
+          : '<svg class="placeholder-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><ellipse cx="12" cy="14" rx="9" ry="7"/><rect x="3" y="8" width="18" height="3" rx="1.5"/><circle cx="12" cy="5" r="2.5"/></svg>') +
+      '</div>' +
+      '<button class="favorite-btn' + (meal.isFavorite ? ' active' : '') + '" data-fav-id="' + meal.id + '" aria-label="Toggle favorite">' +
+        '<svg width="18" height="18" viewBox="0 0 24 24" fill="' + (meal.isFavorite ? 'currentColor' : 'none') + '" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg>' +
+      '</button>' +
+      '<div class="check-badge"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>' +
+      '<div class="portion-pill">' + servings + ' Port.</div>' +
+      '<div class="meal-card-info">' +
+        '<div class="meal-card-name">' + escapeHtml(meal.name) + '</div>' +
+        '<div class="meal-card-tags">' + escapeHtml((meal.tags || []).join(', ')) + '</div>' +
+      '</div>' +
+    '</div>';
+  }
+
+  function bindMealCardEvents(container) {
+    container.querySelectorAll('.meal-card').forEach(function (card) {
+      // Favorite button
+      var favBtn = card.querySelector('.favorite-btn');
+      if (favBtn) {
+        favBtn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          toggleFavorite(favBtn.dataset.favId);
+        });
+      }
+
+      var longPressTimer = null;
+      var didLongPress = false;
+      var startX = 0;
+      var startY = 0;
+      var cancelled = false;
+      var MOVE_THRESHOLD = 10;
+
+      card.addEventListener('pointerdown', function (e) {
+        if (e.target.closest('.favorite-btn')) return;
+        didLongPress = false;
+        cancelled = false;
+        startX = e.clientX;
+        startY = e.clientY;
+        card.style.transition = 'transform 0.2s ease';
+        card.style.transform = 'scale(0.97)';
+        longPressTimer = setTimeout(function () {
+          if (!cancelled) {
+            didLongPress = true;
+            card.style.transform = '';
+            openMealEditor(card.dataset.id);
+          }
+        }, 600);
+      });
+
+      card.addEventListener('pointermove', function (e) {
+        if (cancelled || didLongPress) return;
+        var dx = e.clientX - startX;
+        var dy = e.clientY - startY;
+        if (Math.abs(dx) > MOVE_THRESHOLD || Math.abs(dy) > MOVE_THRESHOLD) {
+          cancelled = true;
+          clearTimeout(longPressTimer);
+          card.style.transform = '';
+        }
+      });
+
+      card.addEventListener('pointerup', function (e) {
+        if (e.target.closest('.favorite-btn')) return;
+        clearTimeout(longPressTimer);
+        card.style.transform = '';
+        if (!didLongPress && !cancelled) {
+          toggleMealSelection(card.dataset.id);
+        }
+      });
+
+      card.addEventListener('pointerleave', function () {
+        clearTimeout(longPressTimer);
+        card.style.transform = '';
+      });
+
+      card.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+    });
+  }
+
+  // ============================================================
+  // Meals Gallery (All Meals)
   // ============================================================
   function bindSearch() {
     var input = document.getElementById('search-input');
@@ -693,76 +819,10 @@
     });
 
     grid.innerHTML = filtered.map(function (meal) {
-      var sel = state.selection.find(function (s) { return s.mealId === meal.id; });
-      var isSelected = !!sel;
-      var servings = sel ? sel.servings : meal.defaultServings;
-
-      return '<div class="meal-card' + (isSelected ? ' selected' : '') + '" data-id="' + meal.id + '">' +
-        '<div class="meal-card-image">' +
-          (meal.image
-            ? '<img src="' + meal.image + '" alt="' + escapeHtml(meal.name) + '" loading="lazy">'
-            : '<svg class="placeholder-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><ellipse cx="12" cy="14" rx="9" ry="7"/><rect x="3" y="8" width="18" height="3" rx="1.5"/><circle cx="12" cy="5" r="2.5"/></svg>') +
-        '</div>' +
-        '<div class="check-badge"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>' +
-        '<div class="portion-pill">' + servings + ' Port.</div>' +
-        '<div class="meal-card-info">' +
-          '<div class="meal-card-name">' + escapeHtml(meal.name) + '</div>' +
-          '<div class="meal-card-tags">' + escapeHtml((meal.tags || []).join(', ')) + '</div>' +
-        '</div>' +
-      '</div>';
+      return buildMealCardHTML(meal);
     }).join('');
 
-    // Bind tap (toggle selection) and long-press (edit)
-    grid.querySelectorAll('.meal-card').forEach(function (card) {
-      var longPressTimer = null;
-      var didLongPress = false;
-      var startX = 0;
-      var startY = 0;
-      var cancelled = false;
-      var MOVE_THRESHOLD = 10;
-
-      card.addEventListener('pointerdown', function (e) {
-        didLongPress = false;
-        cancelled = false;
-        startX = e.clientX;
-        startY = e.clientY;
-        card.style.transition = 'transform 0.2s ease';
-        card.style.transform = 'scale(0.97)';
-        longPressTimer = setTimeout(function () {
-          if (!cancelled) {
-            didLongPress = true;
-            card.style.transform = '';
-            openMealEditor(card.dataset.id);
-          }
-        }, 600);
-      });
-
-      card.addEventListener('pointermove', function (e) {
-        if (cancelled || didLongPress) return;
-        var dx = e.clientX - startX;
-        var dy = e.clientY - startY;
-        if (Math.abs(dx) > MOVE_THRESHOLD || Math.abs(dy) > MOVE_THRESHOLD) {
-          cancelled = true;
-          clearTimeout(longPressTimer);
-          card.style.transform = '';
-        }
-      });
-
-      card.addEventListener('pointerup', function () {
-        clearTimeout(longPressTimer);
-        card.style.transform = '';
-        if (!didLongPress && !cancelled) {
-          toggleMealSelection(card.dataset.id);
-        }
-      });
-
-      card.addEventListener('pointerleave', function () {
-        clearTimeout(longPressTimer);
-        card.style.transform = '';
-      });
-
-      card.addEventListener('contextmenu', function (e) { e.preventDefault(); });
-    });
+    bindMealCardEvents(grid);
   }
 
   function toggleMealSelection(mealId) {
@@ -776,6 +836,7 @@
       }
     }
     persistSelection();
+    renderFavorites();
     renderMealGrid();
     updateSelectionBadge();
   }
@@ -967,6 +1028,7 @@
       if (savedMeal) saveMealToSupabase(savedMeal, state.userId).catch(function (e) { console.error('Meal-Sync fehlgeschlagen:', e); });
     }
     closeMealModal();
+    renderFavorites();
     renderMeals();
   }
 

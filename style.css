@@ -277,11 +277,40 @@ h3 {
   transform: scale(1);
 }
 
+/* Favorite heart button on card */
+.meal-card .favorite-btn {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0,0,0,0.35);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  transition: transform 0.2s var(--ease), background 0.2s;
+  padding: 0;
+}
+
+.meal-card .favorite-btn:active {
+  transform: scale(0.85);
+}
+
+.meal-card .favorite-btn.active {
+  background: var(--accent);
+  color: #fff;
+}
+
 /* Portion pill on card */
 .meal-card .portion-pill {
   position: absolute;
   top: 10px;
-  left: 10px;
+  left: 48px;
   background: rgba(0,0,0,0.55);
   color: #fff;
   font-size: 11px;
