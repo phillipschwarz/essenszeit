@@ -1112,7 +1112,11 @@
           if (btn.dataset.action === 'inc') {
             sel.servings = Math.min(cur + 1, 20);
           } else {
-            sel.servings = Math.max(cur - 1, 1);
+            if (cur <= 1) {
+              removeMealFromPlan(mealId);
+              return;
+            }
+            sel.servings = cur - 1;
           }
           persistSelection();
           renderPlan();
