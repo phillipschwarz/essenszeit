@@ -1,79 +1,66 @@
 # Essenszeit
 
-A meal planning PWA that helps you pick weekly meals from your collection and generates a consolidated shopping list, grouped by supermarket aisle.
+**Plane deine Woche. Koche mit Plan. Kaufe ohne Chaos.**
 
-## Features
+[Live-App ausprobieren](https://essenszeits.vercel.app)
 
-- **Meal gallery** -- browse, search, and filter meals by tags. Tap to select, long-press to edit.
-- **Meal plan** -- adjust portion sizes per meal with a stepper. Swipe-to-delete on mobile.
-- **Shopping list** -- ingredients are automatically consolidated (same item + unit = summed amounts), grouped by category (Obst & Gemuse, Milchprodukte, Fleisch & Fisch, etc.), with a check-off progress bar. Share via native share sheet or clipboard.
-- **Auth & cloud sync** -- email/password authentication via Supabase. Data syncs across devices; local cache provides offline fallback.
-- **Installable PWA** -- service worker with cache-first strategy for the app shell. Add to home screen on iOS/Android.
-- **10 seed meals** included for new accounts (Spaghetti Bolognese, Chicken Curry, Flammkuchen, etc.).
+`PWA` · `Vanilla JS` · `Supabase`
+
+---
+
+<p align="center">
+  <img src="screenshots/gerichtesammlung.png" alt="Gerichtesammlung" width="250">
+  <img src="screenshots/essensplan.png" alt="Essensplan" width="250">
+  <img src="screenshots/einkaufsliste.png" alt="Einkaufsliste" width="250">
+</p>
+
+---
+
+## Was ist Essenszeit?
+
+Essenszeit ist eine Meal-Planning-App fuer den Alltag. Du verwaltest deine Lieblingsgerichte, planst damit deine Woche und bekommst automatisch eine fertige Einkaufsliste -- sortiert nach Supermarkt-Kategorie. Kein Zettelchaos, kein Vergessen, kein Stress.
+
+## Funktionen
+
+### Gerichtesammlung
+Eigene Gerichte anlegen mit Foto, Tags und Zutaten. Durchsuchen und filtern nach Kategorien.
+
+### Favoriten
+Lieblingsgerichte mit Herz markieren fuer schnellen Zugriff.
+
+### Essensplan
+Gerichte fuer die Woche auswaehlen und Portionen per Stepper (+/−) anpassen.
+
+### Einkaufsliste
+Automatische Konsolidierung aller Zutaten nach Kategorie (Obst & Gemuese, Milchprodukte, Fleisch & Fisch, ...). Fortschrittsbalken beim Abhaken und Teilen-Funktion.
+
+### Cloud Sync
+Geraeteuebergreifend synchronisiert ueber Supabase. Offline nutzbar dank Service Worker.
+
+### Installierbar
+Als PWA direkt auf den Homescreen installierbar -- iOS und Android.
+
+### 10 Beispielgerichte
+Sofort loskochbar nach Registrierung. Von Spaghetti Bolognese bis Flammkuchen.
 
 ## Tech Stack
 
-| Layer | Technology |
-|-------|-----------|
-| Frontend | Vanilla HTML/CSS/JS -- no framework, no build step |
-| Backend | [Supabase](https://supabase.com) (Postgres + Auth + RLS) |
-| Hosting | [Vercel](https://vercel.com) (static deploy) |
-| Offline | Service worker (cache-first for app shell, network-first for Supabase) |
+| Frontend | Backend | Hosting |
+|---|---|---|
+| Vanilla HTML/CSS/JS | [Supabase](https://supabase.com) (Postgres + Auth + RLS) | [Vercel](https://vercel.com) |
 
-## Project Structure
+## Selbst ausprobieren
 
-```
-essenszeit-pwa/
-  index.html              # Single-page app shell (auth screen, 3 tabs, modals)
-  app.js                  # All application logic in one IIFE
-  style.css               # Apple-inspired warm minimal design system
-  sw.js                   # Service worker -- cache-first strategy
-  manifest.json           # PWA manifest (standalone, portrait, theme #E07A5F)
-  icons/
-    icon-192.svg
-    icon-512.svg
-  supabase-setup.sql      # Database schema (profiles, meals, ingredients,
-                          #   meal_selections, checklist_items) + RLS policies
-  email-template-confirm.html  # Supabase email confirmation template
-```
+Oeffne die [Live-App](https://essenszeits.vercel.app), erstelle ein Konto und leg los. 10 Beispielgerichte werden automatisch angelegt.
 
-## Data Model
+## Auf dem iPhone installieren
 
-```
-Meal { id, name, image, tags[], defaultServings, ingredients[] }
-Ingredient { id, name, amount, unit, category }
-Selection { mealId, servings }
-```
+Oeffne die [Live-App](https://essenszeits.vercel.app) in Safari, tippe auf das Teilen-Symbol und waehle **"Zum Home-Bildschirm"**. Essenszeit wird dann wie eine native App im Vollbildmodus gestartet -- ohne Adressleiste, mit eigenem Icon.
 
-**Units:** g, kg, ml, l, Stk, EL, TL, Bund, Dose, Scheibe, Prise
-
-**Categories:** Obst & Gemuse, Milchprodukte, Fleisch & Fisch, Brot & Backwaren, Pantry, Gewurze, Sonstiges
-
-## Database Setup
-
-1. Create a Supabase project.
-2. Run `supabase-setup.sql` in the SQL Editor. This creates all tables, indexes, RLS policies, and triggers (auto-profile creation on signup, auto-`updated_at`).
-3. Update `SUPABASE_URL` and `SUPABASE_ANON_KEY` in `index.html`.
-4. Configure the email confirmation template in Supabase Auth settings using `email-template-confirm.html`.
-
-## Local Development
-
-No build step required. Serve the `essenszeit-pwa/` directory with any static file server:
+## Lokale Entwicklung
 
 ```sh
-# Python
-python3 -m http.server 8000 -d essenszeit-pwa
-
-# Node
 npx serve essenszeit-pwa
 ```
 
-Open `http://localhost:8000` in your browser.
-
-## Deployment
-
-The app is deployed to Vercel as a static site. Push to `main` to trigger a deploy.
-
-## Version
-
-0.0.1
+Supabase-Keys (`SUPABASE_URL`, `SUPABASE_ANON_KEY`) in `index.html` setzen. Datenbankschema: `supabase-setup.sql` im Supabase SQL-Editor ausfuehren.
